@@ -25,7 +25,8 @@ Answer:
 prompt_builder = PromptBuilder(template=prompt_template)
 
 generator = HuggingFaceLocalGenerator(
-    model="google/flan-t5-small", 
+    # model="google/flan-t5-small", 
+    model="google/flan-t5-base", 
     task="text2text-generation",
     huggingface_pipeline_kwargs={"framework": "pt"} 
 )
@@ -40,8 +41,8 @@ pipe.connect("prompt_builder", "generator")
 
 result = pipe.run(
     {
-        "retriever": {"query": "ask me a question?"},
-        "prompt_builder": {"query": "ask me a question?"},
+        "retriever": {"query": " how are you ?"},
+        "prompt_builder": {"query": " how are you ?"},
         "generator": {"generation_kwargs": {"max_new_tokens": 50}}
     }
 )
